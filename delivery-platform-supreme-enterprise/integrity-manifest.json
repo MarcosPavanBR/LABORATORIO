@@ -4,18 +4,18 @@
   "files": [
     {
       "path": "CHANGELOG.md",
-      "bytes": 940,
-      "sha256": "73f95286d093fb8ce27daa3b56f940b6e2d3833a8b95b520da6a76cf3b6cb0f2"
+      "bytes": 1456,
+      "sha256": "0828c38cf9f4ece3ba9d8090b802d63b6358d7352005df0b3979a1987fab62d9"
     },
     {
       "path": "README.md",
-      "bytes": 4581,
-      "sha256": "678294d2d137c4879efa2250d0b3bc9245f5bbaac1dc9ed6d036e7aa50a3a826"
+      "bytes": 4723,
+      "sha256": "a9b9388821c3a84bd8ee10f53324845286a48fd213fb27bfd17121a8e68f9966"
     },
     {
       "path": "SKILL.md",
-      "bytes": 20481,
-      "sha256": "8df5eb8458942be89a7068115cd5382fd8ad1e7fffdeac10e1bfdb63fcc44469"
+      "bytes": 20742,
+      "sha256": "42c9a65dfab19f7c459cd3dd7c2381e19879d8671b0979719e17f17a8d74a81f"
     },
     {
       "path": "agents/dps-accessibility-reviewer.md",
@@ -409,8 +409,8 @@
     },
     {
       "path": "references/25-gate-evidence-contract.md",
-      "bytes": 4035,
-      "sha256": "b84ca073b64fbf23b522a827a51eeba3a0e923abc3ef8444b4ad9cf3c3ff7aaa"
+      "bytes": 6059,
+      "sha256": "32cab3e497f4fbe9df60711d52ecc50a8f6a99028f867ae963a5b6dc6400a700"
     },
     {
       "path": "references/26-skill-supply-chain-and-host.md",
@@ -438,9 +438,14 @@
       "sha256": "b8be5052bcf32bf1473449528e6a9d0771d0ad7ce2239bc2d755ef159eb1adbd"
     },
     {
+      "path": "scripts/evidence_ledger.py",
+      "bytes": 8286,
+      "sha256": "15019c4c1db204f0b001b10e2bd820796ae6de624be340a401b02e3dc82cd682"
+    },
+    {
       "path": "scripts/gate_check.py",
-      "bytes": 7463,
-      "sha256": "e98fb061b8d6a02c8681c0a32a9ca6c915f0661adb34de7e968ba2f1e1213974"
+      "bytes": 9339,
+      "sha256": "14f92856abc3432ad0cd10c0d4c095c63a28d75b50cc989c31b76c751ae60b48"
     },
     {
       "path": "scripts/install_claude_agents.py",
@@ -459,13 +464,13 @@
     },
     {
       "path": "scripts/tests/test_skill_tools.py",
-      "bytes": 9884,
-      "sha256": "a97464dedafb6048f11ce3bc53f31f5004410fd8316f4fc730deae7f787588b0"
+      "bytes": 16392,
+      "sha256": "467d5e86fc09db48898ebe1ebef90969d3733b75d5b86f4f98d880428327239d"
     },
     {
       "path": "scripts/validate_pack.py",
-      "bytes": 4614,
-      "sha256": "6c19fb4f25bc1bcc04a45073d0efccf7ff7dcb82ee4b204a0bfdb8ea3b3db867"
+      "bytes": 4635,
+      "sha256": "da088c7cb9bf7ffa4e2bf007174d15f0d37e86f5562a9d46bb8285fed1036a81"
     },
     {
       "path": "sources.md",

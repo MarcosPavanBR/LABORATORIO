@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from common import NAME_RE, frontmatter, resolve_beneath
 
-REQUIRED_SCRIPTS=['validate_pack.py','inventory_agents.py','install_claude_agents.py','gate_check.py','eval_runner.py','package_release.py','build_manifest.py','common.py']
+REQUIRED_SCRIPTS=['validate_pack.py','inventory_agents.py','install_claude_agents.py','gate_check.py','eval_runner.py','package_release.py','build_manifest.py','common.py','evidence_ledger.py']
 REQS=['references','agents','templates','workflows','evals','scripts','examples']
 
 

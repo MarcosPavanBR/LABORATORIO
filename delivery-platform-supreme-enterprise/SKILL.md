@@ -163,6 +163,7 @@ declarado pronto para produção. Controles opcionais dependem do porte, jurisdi
 - `scripts/inventory_agents.py`: descobre **definições** disponíveis no projeto, usuário e diretórios extras de plugin (`--extra-agent-dir`), e aceita relatório explícito de runtime; não infere que os perfis foram executados.
 - `scripts/install_claude_agents.py`: apenas prévia por padrão; `--apply` instala 48 definições em `.claude/agents/` do destino, sem sobrescrever arquivos e sem tocar no produto.
 - `scripts/gate_check.py`: bloqueador determinístico de lançamento, exigindo evidências e autorização humana. Consulte `references/25-gate-evidence-contract.md`.
+- `scripts/evidence_ledger.py`: ledger JSONL append-only com hashes SHA-256 encadeados; detecta adulteração do histórico (não prova autoria). Exigido pelo `gate_check.py` em G9/G11 do perfil `enterprise`. Consulte `references/25-gate-evidence-contract.md`.
 - `scripts/eval_runner.py`: verifica casos e respostas usando critérios declarativos; resultados heurísticos não substituem revisão humana nem teste de software.
 - `scripts/build_manifest.py`: gera `integrity-manifest.json` com SHA-256 de cada arquivo distribuído (excluindo o próprio manifesto).
 - `scripts/package_release.py`: gera ZIP com raiz única e TXT consolidado, após validação e testes; requer `--outdir`.

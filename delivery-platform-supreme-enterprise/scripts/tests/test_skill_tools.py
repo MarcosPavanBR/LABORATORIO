@@ -17,6 +17,7 @@ from install_claude_agents import install
 from gate_check import evaluate,COMMON_CASES,ENTERPRISE_CASES,ARTIFACTS_ENTERPRISE,ARTIFACTS_BASE
 from eval_runner import score,verify_catalogue
 from build_manifest import manifest,verify
+from evidence_ledger import append as ledger_append,verify as ledger_verify,GENESIS
 
 class TestSkillValidation(unittest.TestCase):
     def test_frontmatter_skill_is_valid(self):
@@ -114,6 +115,14 @@ class TestReleaseGate(unittest.TestCase):
             path=root/'output'/name;path.parent.mkdir(exist_ok=True)
             path.write_text('synthetic fixture')
             artifacts.append('output/'+name)
+        ledger=None
+        if profile=='enterprise':
+            lp=root/'output/evidence-ledger.jsonl'
+            for c in checks:
+                ledger_append(lp,{'id':c['id'],'gate':gate,'status':'PASS','commit':'0123456',
+                                  'executed_by':'fixture-runner','sha256':c['sha256']})
+            st=ledger_verify(lp)
+            ledger={'path':'output/evidence-ledger.jsonl','entries':st['entries'],'head':st['head']}
         prior=[]
         if gate=='G9':
             for name in ('G6','G7','G8','G11'):
@@ -121,10 +130,12 @@ class TestReleaseGate(unittest.TestCase):
                 sub=self.build_mock(root,name,profile)
                 path.write_text(json.dumps(sub))
                 prior.append({'gate':name,'status':'PASS','report_path':str(path.relative_to(root)),'sha256':digest(path)})
-        return {'gate':gate,'profile':profile,'commit':'0123456','p0_open':0,'p1_open':0,
+        report={'gate':gate,'profile':profile,'commit':'0123456','p0_open':0,'p1_open':0,
                  'critical_cases':checks,'prerequisite_gates':prior,'artifacts':artifacts,
                  'human_approval':{'approved':True,'approver':'fixture-reviewer','timestamp':'2026-10-15T01:00Z',
                                    'scope':'test-fixture-only'}}
+        if ledger:report['ledger']=ledger
+        return report
     def test_valid_fixture_mechanically_passes_g11_not_product_cert(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp);report=self.build_mock(p)
@@ -146,6 +157,101 @@ class TestReleaseGate(unittest.TestCase):
                 if g['gate']=='G6':g['sha256']=digest(path)
             r=evaluate(report,p)
             self.assertTrue(any('content is not PASS' in x for x in r['blocking_reasons']))
+
+class TestEvidenceLedger(unittest.TestCase):
+    REC={'id':'checkout-e2e','gate':'G6','status':'PASS','commit':'abc1234',
+         'executed_by':'ci-runner','sha256':'a'*64}
+    def make(self,tmp,n=3):
+        lp=Path(tmp)/'ledger.jsonl'
+        for i in range(n):ledger_append(lp,dict(self.REC,id=f'case-{i}'))
+        return lp
+    def test_empty_ledger_is_genesis(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=Path(tmp)/'l.jsonl';lp.write_bytes(b'')
+            r=ledger_verify(lp)
+            self.assertTrue(r['ok']);self.assertEqual(r['head'],GENESIS);self.assertEqual(r['entries'],0)
+    def test_chain_links_and_head_changes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=self.make(tmp);r=ledger_verify(lp)
+            self.assertTrue(r['ok']);self.assertEqual(r['entries'],3);self.assertEqual(len(set(r['chain'])),3)
+            before=r['head'];ledger_append(lp,self.REC)
+            self.assertNotEqual(ledger_verify(lp)['head'],before)
+    def test_edit_in_the_middle_is_detected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=self.make(tmp);lines=lp.read_text().splitlines()
+            lines[1]=lines[1].replace('case-1','case-X');lp.write_text('\n'.join(lines)+'\n')
+            r=ledger_verify(lp);self.assertFalse(r['ok'])
+            self.assertTrue(any('entry_hash mismatch' in e for e in r['errors']))
+    def test_deleting_or_reordering_is_detected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=self.make(tmp);lines=lp.read_text().splitlines()
+            lp.write_text('\n'.join([lines[0],lines[2]])+'\n')
+            self.assertFalse(ledger_verify(lp)['ok'])
+            lp.write_text('\n'.join([lines[1],lines[0],lines[2]])+'\n')
+            self.assertFalse(ledger_verify(lp)['ok'])
+    def test_rewritten_entry_with_fixed_hash_still_breaks_next_link(self):
+        import evidence_ledger as el
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=self.make(tmp);rows=[json.loads(x) for x in lp.read_text().splitlines()]
+            rows[0]['record']['status']='FAIL';rows[0]['entry_hash']=el.entry_hash(rows[0])
+            lp.write_text('\n'.join(json.dumps(x) for x in rows)+'\n')
+            self.assertTrue(any('prev_hash' in e for e in ledger_verify(lp)['errors']))
+    def test_missing_trailing_newline_and_duplicate_keys_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=self.make(tmp,1);lp.write_bytes(lp.read_bytes().rstrip(b'\n'))
+            self.assertFalse(ledger_verify(lp)['ok'])
+            lp.write_text('{"seq":1,"seq":1}\n');self.assertFalse(ledger_verify(lp)['ok'])
+    def test_append_rejects_bad_records_and_invalid_ledger(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lp=Path(tmp)/'l.jsonl'
+            for bad in (dict(self.REC,sha256='nothex'),dict(self.REC,status='MAYBE'),
+                        dict(self.REC,commit='UNSET'),dict(self.REC,executed_by='NOT_INVOKED'),{}):
+                with self.assertRaises(ValueError):ledger_append(lp,bad)
+            self.assertFalse(lp.exists() and lp.stat().st_size>0)
+            ledger_append(lp,self.REC);lp.write_text(lp.read_text().replace('ci-runner','someone'))
+            with self.assertRaises(ValueError):ledger_append(lp,self.REC)
+    def test_enterprise_gate_requires_ledger(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);report=self.build(p)
+            del report['ledger']
+            self.assertTrue(any('missing evidence ledger' in x for x in evaluate(report,p)['blocking_reasons']))
+    build_mock=TestReleaseGate.build_mock
+    def build(self,p,gate='G11'):
+        return self.build_mock(p,gate,'enterprise')
+    def test_valid_ledger_passes_even_after_it_grows(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);report=self.build(p)
+            ledger_append(p/'output/evidence-ledger.jsonl',self.REC)
+            self.assertEqual(evaluate(report,p)['status'],'PASS')
+    def test_tail_truncation_blocks(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);report=self.build(p)
+            lp=p/'output/evidence-ledger.jsonl';lines=lp.read_text().splitlines()
+            lp.write_text('\n'.join(lines[:-2])+'\n')
+            self.assertTrue(any('truncation' in x for x in evaluate(report,p)['blocking_reasons']))
+    def test_history_rewrite_blocks(self):
+        import evidence_ledger as el
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);report=self.build(p)
+            lp=p/'output/evidence-ledger.jsonl';rows=[json.loads(x) for x in lp.read_text().splitlines()]
+            prev=GENESIS
+            for r in rows:   # attacker rebuilds a self-consistent chain
+                r['record']['executed_by']='attacker';r['prev_hash']=prev;r['entry_hash']=el.entry_hash(r);prev=r['entry_hash']
+            lp.write_text('\n'.join(json.dumps(x) for x in rows)+'\n')
+            self.assertTrue(any('differs from pinned head' in x for x in evaluate(report,p)['blocking_reasons']))
+    def test_case_not_anchored_blocks(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);report=self.build(p)
+            report['critical_cases'][0]['sha256']='b'*64
+            reasons=evaluate(report,p)['blocking_reasons']
+            self.assertTrue(any('not anchored in evidence ledger' in x for x in reasons))
+    def test_g9_enterprise_still_passes_with_ledgers(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);self.assertEqual(evaluate(self.build(p,'G9'),p)['status'],'PASS')
+    def test_mvp_without_ledger_is_unchanged(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);report=self.build_mock(p,'G11','mvp')
+            self.assertNotIn('ledger',report);self.assertEqual(evaluate(report,p)['status'],'PASS')
 
 class TestEvalsAndIntegrity(unittest.TestCase):
     def test_eval_catalogue_is_well_formed(self):

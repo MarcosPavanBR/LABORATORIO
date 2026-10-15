@@ -22,6 +22,7 @@ Entrada é um JSON de alegações, não uma prova independente. Exemplo de estru
   ],
   "prerequisite_gates":[],
   "artifacts":[],
+  "ledger":{"path":"output/evidence-ledger.jsonl","entries":0,"head":"<hash-de-evidence_ledger.py head>"},
   "human_approval":{"approved":false,"approver":"","timestamp":"","scope":""}
 }
 ```
@@ -31,6 +32,27 @@ Entrada é um JSON de alegações, não uma prova independente. Exemplo de estru
 `critical_cases` precisam cobrir: checkout ponta a ponta; prevenção de dupla cobrança; balanço do ledger; replay de webhook; autorização por recurso; máquina de estados; corrida de aceite; conciliação; restauração de backup; rollback; privacidade; runbook; revisão legal; custo por pedido. Perfil enterprise adiciona controle de acesso, vendor risk, simulação DR, integridade de auditoria e rotação de segredo.
 
 Um `PASS` em arquivo JSON é apenas uma **declaração apoiada por um artefato**. O validador confere existência e SHA-256, mas não sabe se o comando de teste foi realmente executado naquele commit. Revisor humano, CI confiável ou atestação assinada devem conferir execução e identidade. Não usar o validador isoladamente como autorização de deploy.
+
+## Ledger de evidências encadeado (`evidence_ledger.py`)
+
+Cada caso crítico aprovado é registrado em um arquivo JSONL append-only. Cada linha guarda `seq`, `timestamp`, `prev_hash`, o `record` e `entry_hash` = SHA-256 do JSON canônico dos demais campos, ligado ao hash da linha anterior.
+
+```bash
+# registrar (record: id, gate, status, commit, executed_by, sha256 do artefato)
+python3 scripts/evidence_ledger.py append --ledger output/evidence-ledger.jsonl --record output/case-checkout.json
+# fixar no relatório do gate os valores de "entries" e "head"
+python3 scripts/evidence_ledger.py head --ledger output/evidence-ledger.jsonl
+# conferir a cadeia e o ponto fixado
+python3 scripts/evidence_ledger.py verify --ledger output/evidence-ledger.jsonl --expect-entries N --expect-head H
+```
+
+No `gate_check.py`: perfil `enterprise` em **G9 e G11** exige o bloco `ledger`; em qualquer perfil, se o bloco existir, é verificado. O gate bloqueia se a cadeia estiver quebrada, se o ledger for mais curto que `entries` (truncamento), se o hash na posição `entries` diferir de `head` (histórico reescrito) ou se um caso crítico não estiver registrado com o mesmo `id`, `sha256`, `commit` e status `PASS`. O ledger pode crescer depois do relatório: só o prefixo fixado é conferido.
+
+**Limites (não vender como mais do que é):**
+- Dá **evidência de adulteração**, não autoria nem não-repúdio. Quem escreve no ledger *e* no relatório consegue reconstruir a cadeia inteira.
+- Para valor de auditoria, ancorar `head` fora do projeto: tag/commit git assinado, artefato de CI confiável ou carimbo de tempo externo; para autoria, assinar com chave assimétrica (ferramenta externa à skill).
+- Não prova que o teste foi executado de verdade; continua valendo a conferência por CI confiável ou revisor humano.
+- Escritor único: o lock é advisory (POSIX); em outras plataformas, não escrever em paralelo.
 
 ## Invariantes da liberação
 

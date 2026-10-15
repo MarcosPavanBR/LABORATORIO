@@ -44,6 +44,7 @@ O instalador **não sobrescreve arquivos** existentes e não cria subagentes no 
 - `scripts/inventory_agents.py`: perfis/skills presentes e runtime declarado separadamente;
 - `scripts/install_claude_agents.py`: dry-run e instalação opt-in;
 - `scripts/gate_check.py`: analisa **evidências fornecidas** e bloqueia G9/G11 incompletos (não executa deploy);
+- `scripts/evidence_ledger.py`: ledger de evidências com hashes encadeados (tamper-evident, sem assinatura); exigido em G9/G11 `enterprise`;
 - `scripts/eval_runner.py`: catálogo de testes de comportamento/contraprovas e heurísticas, não substitui LLM ou revisão humana;
 - `scripts/build_manifest.py`: SHA-256 dos arquivos do pacote;
 - `scripts/package_release.py`: testes, validação e ZIP/TXT;

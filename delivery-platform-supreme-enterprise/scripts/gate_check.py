@@ -9,6 +9,7 @@ import re
 import sys
 from pathlib import Path
 from common import resolve_beneath,digest
+from evidence_ledger import verify as verify_ledger
 
 COMMON_CASES={
  'checkout-e2e','double-charge','ledger-balance','webhook-replay',
@@ -28,6 +29,34 @@ ARTIFACTS_BASE={'enterprise-readiness.md','compliance-matrix.csv','finops-budget
   'dr-plan.md','incident-response-playbook.md','security-findings.md'}
 ARTIFACTS_ENTERPRISE=ARTIFACTS_BASE|{'access-review.csv','vendor-risk-register.csv'}
 HEX64=re.compile(r'^[a-f0-9]{64}$')
+
+
+def check_ledger(ledger,checks:list,commit,project:Path,required:bool)->list:
+    """Anchor critical cases to a hash-chained evidence ledger (tamper-evidence only).
+
+    The report pins `entries` and `head`: the ledger may have grown since, but the first
+    `entries` records must be intact, which also detects tail truncation and rewrites.
+    """
+    if ledger is None:
+        return ['missing evidence ledger (required for enterprise G9/G11)'] if required else []
+    if not isinstance(ledger,dict):return ['invalid ledger declaration']
+    entries,head=ledger.get('entries'),ledger.get('head')
+    if type(entries)!=int or entries<1 or not isinstance(head,str) or not HEX64.fullmatch(head):
+        return ['ledger needs integer entries>=1 and 64-hex head']
+    try:fp=resolve_beneath(project,ledger.get('path'))
+    except (ValueError,FileNotFoundError,OSError):return ['missing/unsafe evidence ledger']
+    state=verify_ledger(fp)
+    if not state['ok']:return ['evidence ledger invalid: '+'; '.join(state['errors'][:3])]
+    if state['entries']<entries:return ['evidence ledger shorter than pinned entries (truncation?)']
+    if state['chain'][entries-1]!=head:return ['evidence ledger history differs from pinned head']
+    anchored=state['records'][:entries]
+    blockers=[]
+    for row in checks:
+        if not isinstance(row,dict):continue
+        found=any(r.get('id')==row.get('id') and r.get('sha256')==row.get('sha256')
+                  and r.get('commit')==commit and r.get('status')=='PASS' for r in anchored)
+        if not found:blockers.append(f"{row.get('id','?')}: not anchored in evidence ledger")
+    return blockers
 
 
 def evaluate(doc:dict,project:Path)->dict:
@@ -66,6 +95,8 @@ def evaluate(doc:dict,project:Path)->dict:
                 fp=resolve_beneath(project,path)
                 if digest(fp)!=want:blockers.append(f'{ident}: hash mismatch')
             except (ValueError,FileNotFoundError,OSError):blockers.append(f'{ident}: missing/unsafe evidence')
+        ledger_required=profile=='enterprise' and gate in {'G9','G11'}
+        blockers.extend(check_ledger(doc.get('ledger'),checks,doc.get('commit'),project,ledger_required))
         if gate=='G9':
             prior=doc.get('prerequisite_gates',[])
             if not isinstance(prior,list):prior=[]

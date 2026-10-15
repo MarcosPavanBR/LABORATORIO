@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Novo `scripts/evidence_ledger.py`: ledger JSONL append-only com SHA-256 encadeado (`append`, `verify`, `head`), sem dependências.
+- `gate_check.py`: bloco `ledger` verificado (cadeia, truncamento, reescrita, casos ancorados); obrigatório em G9/G11 do perfil `enterprise`.
+- Testes: +14 casos (adulteração, remoção, reordenação, truncamento, reescrita de cadeia, ledger que cresce, mvp inalterado).
+- Limite documentado: tamper-evidence, não assinatura nem não-repúdio (`references/25`).
+
 ## 2.2.0 — correção estrutural e execução segura
 
 - Reconstrução dos 98 arquivos originais do TXT v2.1, sem herdar arquitetura de produto existente.
