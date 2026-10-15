@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
 import ClientApp from './pages/ClientApp';
 import RestaurantApp from './pages/RestaurantApp';
 import DeliveryApp from './pages/DeliveryApp';
@@ -11,6 +12,8 @@ const AppContent: React.FC = () => {
   switch (currentView) {
     case 'landing':
       return <LandingPage />;
+    case 'login':
+      return <LoginPage />;
     case 'client':
       return <ClientApp />;
     case 'restaurant':
