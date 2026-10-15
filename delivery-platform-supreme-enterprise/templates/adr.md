@@ -1,0 +1,15 @@
+# ADR-XXXX: <título>
+- Status: PROPOSED / ACCEPTED / SUPERSEDED
+- Autor(es), revisor(es), data, commit:
+- Contexto/limites (geografia, escala, orçamento, equipe):
+- Requisitos e drivers de decisão:
+- Pesos fixados ANTES das notas:
+- Alternativa A (custo TCO12/TCO36, riscos, upside):
+- Alternativa B (custo TCO12/TCO36, riscos, upside):
+- Alternativa C (custo TCO12/TCO36, riscos, upside):
+- Sensitividade, evidências e incerteza:
+- Escolha e por quê:
+- Contraprova e reviewer dissidente:
+- Consequências operacionais, SLA, segurança, LGPD:
+- Migração/rollback:
+- Gatilho para rever decisão:

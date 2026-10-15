@@ -1,0 +1,5 @@
+{
+  "executors": [
+    {"name":"runtime-code-reviewer","available":false,"source":"example-only","evidence":"This is NOT a runtime discovery result."}
+  ]
+}

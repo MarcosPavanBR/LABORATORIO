@@ -1,0 +1,13 @@
+# TASK-ID: <ID> — <objetivo mensurável>
+- Modo / gate: <BUILD / G6>
+- Contexto e commit: <URL/SHA ou GREENFIELD>
+- Atores afetados: <customer/merchant/courier/admin>
+- Requisitos funcionais e não funcionais: <lista verificável>
+- Decisões herdadas? **NÃO** para greenfield; ADR se caso contrário.
+- Dependências e owner: <...>
+- Domínios, fluxos de dinheiro e acessos: <...>
+- Arquivos permitidos: <...>
+- Critérios de aceite: Given/When/Then + comando + log esperado
+- Cenários de falha e reversão: <...>
+- Permissões / orçamento de execução: <...>
+- Revisores independentes: <...>

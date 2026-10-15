@@ -1,0 +1,13 @@
+metric,unit,pessimistic,base,optimistic,evidence_or_assumption
+completed_orders,orders/month,,,,
+average_ticket,BRL/order,,,,
+take_rate,ratio,,,,
+platform_service_revenue,BRL/order,,,,
+subsidy,BRL/order,,,,
+psp_fee,BRL/order,,,,
+variable_support,BRL/order,,,,
+variable_cloud,BRL/order,,,,
+chargeback_expected_cost,BRL/order,,,,
+contribution_margin,BRL/order,,,,
+fixed_cost,BRL/month,,,,
+break_even_orders,orders/month,,,,

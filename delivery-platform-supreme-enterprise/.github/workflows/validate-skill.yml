@@ -1,0 +1,16 @@
+name: Validate Delivery Supreme Skill
+on:
+  push:
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 scripts/validate_pack.py
+      - run: python3 -m unittest discover -s scripts/tests -v
+      - run: python3 scripts/eval_runner.py
+      - run: python3 scripts/build_manifest.py --verify

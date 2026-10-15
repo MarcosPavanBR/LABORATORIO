@@ -1,0 +1,11 @@
+# Teste de falha — <nome>
+- ID/prioridade/owner:
+- Pré-condição (dados sintéticos e staging):
+- Given:
+- When (injeção falha autorizada):
+- Then (invariante):
+- Como verificar estado banco/PSP/ledger:
+- Como garantir retorno ao baseline:
+- Comandos reais e outputs:
+- Evidências:
+- Resultado: NOT_RUN

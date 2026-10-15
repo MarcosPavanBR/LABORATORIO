@@ -1,0 +1,4 @@
+id,category,scenario,impact,likelihood,evidence,status,owner,mitigation,verification,gate
+R-001,payments,duplicate capture,Critical,Unknown,,OPEN,payment-integrator,provider state/idempotency,test twice,G6
+R-002,authorization,cross-tenant order,Critical,Unknown,,OPEN,security-architect,resource authorization,negative tests,G7
+R-003,operations,no courier available,High,Unknown,,OPEN,dispatch-algorithm-engineer,fallback support,scenario drill,G8

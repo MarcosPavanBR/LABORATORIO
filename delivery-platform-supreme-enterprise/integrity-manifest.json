@@ -1,0 +1,592 @@
+{
+  "schema_version": "1.0",
+  "algorithm": "sha256",
+  "files": [
+    {
+      "path": ".github/workflows/validate-skill.yml",
+      "bytes": 449,
+      "sha256": "5ce3e1d4fdc995c169f03d23230c03a2988d87b7a395e69da28e09030eb2fdae"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 940,
+      "sha256": "73f95286d093fb8ce27daa3b56f940b6e2d3833a8b95b520da6a76cf3b6cb0f2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4581,
+      "sha256": "678294d2d137c4879efa2250d0b3bc9245f5bbaac1dc9ed6d036e7aa50a3a826"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 20481,
+      "sha256": "8df5eb8458942be89a7068115cd5382fd8ad1e7fffdeac10e1bfdb63fcc44469"
+    },
+    {
+      "path": "agents/dps-accessibility-reviewer.md",
+      "bytes": 2641,
+      "sha256": "400f7ece60dfc9ea80c58e2578d1b018113af0d7df044f35293d373c8012acb2"
+    },
+    {
+      "path": "agents/dps-api-contract-designer.md",
+      "bytes": 2694,
+      "sha256": "63244a09553860efc60672452e43d4cea6f7c7872e6b2039fd7d05af9956b6ab"
+    },
+    {
+      "path": "agents/dps-architecture-challenger.md",
+      "bytes": 2658,
+      "sha256": "f0d0211f667a5c82552026e170d00346a1265d34dbf935cd05a8a1ced912fa68"
+    },
+    {
+      "path": "agents/dps-architecture-proposer.md",
+      "bytes": 2680,
+      "sha256": "a460414ddc04e3cf21d7f7162b9fed1ad2abc8b5e7f7a20b21fa82228cd68a6d"
+    },
+    {
+      "path": "agents/dps-backend-engineer.md",
+      "bytes": 2693,
+      "sha256": "ccc4089ddba40216585b8c028c073774db5f92b8c57ca6129e8758bed4dfe13a"
+    },
+    {
+      "path": "agents/dps-blue-team-reviewer.md",
+      "bytes": 2667,
+      "sha256": "5cb2846519deb8c68dc8fbce88c04cd2ffc2f6ae7a76e93952e620bcd3119f16"
+    },
+    {
+      "path": "agents/dps-business-strategist.md",
+      "bytes": 2734,
+      "sha256": "169fddfcf7c16d801a2cedc7e16d2a5ffd9f3f603e1d93cca58233baaca4a409"
+    },
+    {
+      "path": "agents/dps-catalog-specialist.md",
+      "bytes": 2678,
+      "sha256": "ff80d83517be2b131e466c44833f342104ebdd8957237ae487bba355e0d7351c"
+    },
+    {
+      "path": "agents/dps-chaos-engineer.md",
+      "bytes": 2644,
+      "sha256": "d6a50db47e2e8f99f6af90d22bb9bb07936b9c84aec295c10d69bdf929e770ed"
+    },
+    {
+      "path": "agents/dps-checkout-specialist.md",
+      "bytes": 2683,
+      "sha256": "f61a74bd600c8e348dba437e485219ce6e3b3d6c9683cb26b43b4d064679e19c"
+    },
+    {
+      "path": "agents/dps-courier-ops-specialist.md",
+      "bytes": 2696,
+      "sha256": "08abf9552ced0c537f7f13b08bcad5753c2493c2dd6cdea8aed6219309072f25"
+    },
+    {
+      "path": "agents/dps-data-analytics-engineer.md",
+      "bytes": 2711,
+      "sha256": "e576bf9121610bb88d1ce4e939aebff73b2d789df6360fc2795b98e8f5be7bfe"
+    },
+    {
+      "path": "agents/dps-database-engineer.md",
+      "bytes": 2678,
+      "sha256": "02e678ddbbf861168ffeaf76c92e91e29906d9c724057b5729362f4d62b36645"
+    },
+    {
+      "path": "agents/dps-devsecops-engineer.md",
+      "bytes": 2682,
+      "sha256": "606cc0e3814ad29aab7b9e86fec194e52422ab85bf2b04d5586efcc699f6cba5"
+    },
+    {
+      "path": "agents/dps-dispatch-algorithm-engineer.md",
+      "bytes": 2694,
+      "sha256": "d7ba044d5cc564dbdfca72b1e343deb43e1e319bf69afd9798cdd140a2508600"
+    },
+    {
+      "path": "agents/dps-documentation-engineer.md",
+      "bytes": 2675,
+      "sha256": "cc31552f77318a6ebdf23b8af2528e2663041a42b749d84d6b60a68d0e243a7f"
+    },
+    {
+      "path": "agents/dps-domain-modeler.md",
+      "bytes": 2674,
+      "sha256": "ab0c8b37d24ba40f33871967364c677110e4340a5f708d2229aea7b1d06680f7"
+    },
+    {
+      "path": "agents/dps-e2e-test-runner.md",
+      "bytes": 2640,
+      "sha256": "7a171b9d84735af84654c2a95a99da64c1b549604c1486f5e42ec5442f5e4037"
+    },
+    {
+      "path": "agents/dps-eventing-engineer.md",
+      "bytes": 2641,
+      "sha256": "2ca6dfc1eb4566dfee41a6ad2eff9bc94c4a98733583387979320ddcd6b27525"
+    },
+    {
+      "path": "agents/dps-fraud-risk-specialist.md",
+      "bytes": 2628,
+      "sha256": "c2f7b5ec805fc51a6a8cfc9ff0e05473ea9f7c4d66456682a46d347600cf7fe9"
+    },
+    {
+      "path": "agents/dps-frontend-web-engineer.md",
+      "bytes": 2688,
+      "sha256": "490ac752de4c7372c89d20f851517577d4420523676cd5c5f497aace24d29573"
+    },
+    {
+      "path": "agents/dps-geospatial-engineer.md",
+      "bytes": 2673,
+      "sha256": "c5922a65acd31ee4aa31ff00fda910f36bc057f230f922109d3567c02b5a772e"
+    },
+    {
+      "path": "agents/dps-growth-scientist.md",
+      "bytes": 2678,
+      "sha256": "c0dd7cfd04a5416fbb4aa9181c97697a37c66ad7bf18b09c7d663aa1f558992a"
+    },
+    {
+      "path": "agents/dps-identity-specialist.md",
+      "bytes": 2673,
+      "sha256": "692bfd46eee08372e67e65eb23615075312456141837bae7930cac317ad63ab0"
+    },
+    {
+      "path": "agents/dps-independent-adjudicator.md",
+      "bytes": 2688,
+      "sha256": "3ae1760df04546d88ad43741dc80b16ab785e9631068e72c74ccf509fe17d02e"
+    },
+    {
+      "path": "agents/dps-ledger-accountant.md",
+      "bytes": 2665,
+      "sha256": "bd59bdedaf93d7d67721d71deff26eb3f7d4035f668530eff96785fc32cb114c"
+    },
+    {
+      "path": "agents/dps-market-researcher.md",
+      "bytes": 2740,
+      "sha256": "b7b86d66986de510cf19dc18650f6e2d711e932a23f4bf000ff1b42e768fa27c"
+    },
+    {
+      "path": "agents/dps-merchant-ops-specialist.md",
+      "bytes": 2688,
+      "sha256": "7bc5a2412f67ee804d443e4fb424bc035c4464ceda022804c91e005d23bdafe2"
+    },
+    {
+      "path": "agents/dps-mobile-engineer.md",
+      "bytes": 2650,
+      "sha256": "0b777afa4a571f6027a3b9e36c7c3a519a4d6f576c418869324b0eb5bdddbf0e"
+    },
+    {
+      "path": "agents/dps-observability-engineer.md",
+      "bytes": 2673,
+      "sha256": "1ba481334544712f24872df9522f1536b533f9c800dae73e6c6902992bf01703"
+    },
+    {
+      "path": "agents/dps-orchestrator.md",
+      "bytes": 2770,
+      "sha256": "449f1e4b4fed661537aed8d71bfd8f76a48725491fa4ac43ee41a49e905f9550"
+    },
+    {
+      "path": "agents/dps-orders-specialist.md",
+      "bytes": 2662,
+      "sha256": "7416302cdfd39409c7cb8ba37a6fdc9d5af98736f4a0950a45781e6c2d14dae6"
+    },
+    {
+      "path": "agents/dps-payment-integrator.md",
+      "bytes": 2724,
+      "sha256": "23a7bb6eb96257103fefcbe2e7ddadf2f89f6d50b9d4edfba8896f09452e2590"
+    },
+    {
+      "path": "agents/dps-performance-engineer.md",
+      "bytes": 2680,
+      "sha256": "921c38b6e89b2d9a02c4ddd13c8a6a15b49039a67f1bc67abbf27d872cf8447e"
+    },
+    {
+      "path": "agents/dps-pricing-specialist.md",
+      "bytes": 2698,
+      "sha256": "b2689c97f6d77c753c030bdd965315e1c5227eeea0cf394091d3497ac8fec1bb"
+    },
+    {
+      "path": "agents/dps-privacy-dpo.md",
+      "bytes": 2658,
+      "sha256": "6cf2139d811aeb5e2e4be599e53cde304f7866bf044ccf24f067b7702a78f290"
+    },
+    {
+      "path": "agents/dps-product-manager.md",
+      "bytes": 2667,
+      "sha256": "e8ca8e75566431765965518afda43e298331bdb93d7544b061f3773ad4d08095"
+    },
+    {
+      "path": "agents/dps-qa-automation-engineer.md",
+      "bytes": 2663,
+      "sha256": "5f128c6730a6a2e3114cbc056a15e21302a523b592227aa334fa1e9cc24ee3a4"
+    },
+    {
+      "path": "agents/dps-reconciliation-auditor.md",
+      "bytes": 2673,
+      "sha256": "9970704b35a4dc574f6591f13eec9c9690f317da69dcb83f3dac422fc4b799cc"
+    },
+    {
+      "path": "agents/dps-red-team-reviewer.md",
+      "bytes": 2665,
+      "sha256": "5709c5c58ccf5e2242f4f84ed5259afb3581102e26fa7387ef1d679f55851759"
+    },
+    {
+      "path": "agents/dps-regulatory-analyst.md",
+      "bytes": 2688,
+      "sha256": "59bfc5868c94ac5e7848524f738875f73b8e9faca3a0d72b3d9331a591691188"
+    },
+    {
+      "path": "agents/dps-security-architect.md",
+      "bytes": 2653,
+      "sha256": "5ce3f6ba4a993f58428ddfd4a21135b33d2620cc6e52cbeef0ef38e05d1a5485"
+    },
+    {
+      "path": "agents/dps-sre-engineer.md",
+      "bytes": 2653,
+      "sha256": "7220475183e54e2f6f29bd998ce9359f19500eee8cb2b76c161cd4f01b3dbd56"
+    },
+    {
+      "path": "agents/dps-supply-chain-reviewer.md",
+      "bytes": 2676,
+      "sha256": "4a67c1d9940e2cc9f3ebf5a5cb0c29a50e173ca8f6a1388c1a99d5cf1c4b24d4"
+    },
+    {
+      "path": "agents/dps-support-ops-specialist.md",
+      "bytes": 2653,
+      "sha256": "1f48b066cc0b95bd6059cf709fb61f5b5c2e7547ff9bd2e1a69a30806573f999"
+    },
+    {
+      "path": "agents/dps-tax-compliance-specialist.md",
+      "bytes": 2699,
+      "sha256": "fb89a77b6f7522565441dde3bbe70ae86b326f452ee86ad2076b4145efaf1715"
+    },
+    {
+      "path": "agents/dps-unit-economist.md",
+      "bytes": 2671,
+      "sha256": "141aaad186afd1bd8cdb2a9a89b3a1b3d578e9b4c719605b555291bccc15c819"
+    },
+    {
+      "path": "agents/dps-ux-design-lead.md",
+      "bytes": 2687,
+      "sha256": "ec5062556ee42e9485fd8859e9cde13de4ecdb7e20eaa51825771fde2adf93a7"
+    },
+    {
+      "path": "agents/registry.json",
+      "bytes": 16582,
+      "sha256": "de35d7fb51043afc5275cad51799c2f60515ade5ec076b402dee55e3f04683fc"
+    },
+    {
+      "path": "evals/README.md",
+      "bytes": 1302,
+      "sha256": "80813df13f04986e39dfa9f2a2f0ad9dc9ddb4fd71622fde77faf28c5bc260fc"
+    },
+    {
+      "path": "evals/scenarios.json",
+      "bytes": 16919,
+      "sha256": "14a7612cacd7527773bb2fd8c7d2a5d501993b538f532eb6e35893e132b5a093"
+    },
+    {
+      "path": "examples/runtime-declarations.sample.json",
+      "bytes": 157,
+      "sha256": "78c9cb46145d2ddb81cab1a514d8837c6bc1016ef2268cfe9d8762a136df110d"
+    },
+    {
+      "path": "examples/sample-gate-blocked.json",
+      "bytes": 351,
+      "sha256": "bc1feb6ab89a4891c7c088835e59ad72be9dfb20ff742e52031b7f3683971e04"
+    },
+    {
+      "path": "references/00-routing.md",
+      "bytes": 2414,
+      "sha256": "1f8efc68a55ede19facaf7c8ed2f7fd735598d703ea80f678ab97b7a853d9001"
+    },
+    {
+      "path": "references/01-multiagent-governance.md",
+      "bytes": 3124,
+      "sha256": "8c0d5f45fc7fa25e10aca731f81a942160d37b8576b4ca27d307a47ba9d04821"
+    },
+    {
+      "path": "references/02-market-and-economics.md",
+      "bytes": 3011,
+      "sha256": "b2df0d32bcd5fc4aee862ae2ce2096bdb59513f31c95702302e534fd1ea33a98"
+    },
+    {
+      "path": "references/03-architecture-choice.md",
+      "bytes": 2668,
+      "sha256": "472cfa53f6ea8782afae3c0a7ead0c83f9fcaa47f02840978e36d2c94bb2bd02"
+    },
+    {
+      "path": "references/04-domain-contracts.md",
+      "bytes": 2490,
+      "sha256": "a61bf529dfdd3d1bc490f56af0a6f2aa0547d6a3120e0edb88b1e700b65550e8"
+    },
+    {
+      "path": "references/05-data-and-eventing.md",
+      "bytes": 2188,
+      "sha256": "3d7fd634cfaead81effd76288e4210b98ed42ada832b542d336d0c8d3f65c4be"
+    },
+    {
+      "path": "references/06-api-and-integrations.md",
+      "bytes": 2518,
+      "sha256": "63fbfe761855ff9ca66d539a7bbfc1be8a19d2287b109890afbad0f9319d7dc4"
+    },
+    {
+      "path": "references/07-money-and-payments.md",
+      "bytes": 3378,
+      "sha256": "1a64eb31ba43f79cd21c0b4c234034ba90793837dc3fccc33e303b778b584c7f"
+    },
+    {
+      "path": "references/08-dispatch-and-logistics.md",
+      "bytes": 3033,
+      "sha256": "56850d6617050c8264063931e9e08d509b7e0a5e50739826418a6294317c79b1"
+    },
+    {
+      "path": "references/09-catalog-pricing-discovery.md",
+      "bytes": 1806,
+      "sha256": "20a85f45b0cd3961f570ae44f7f39a663755fa0621e7787c7249bfee1bbe950c"
+    },
+    {
+      "path": "references/10-merchant-and-fulfillment.md",
+      "bytes": 1711,
+      "sha256": "c44f7d14e815772aa2d0fad3848aeb9116897cf752824ecaf4e9c9df826b91b5"
+    },
+    {
+      "path": "references/11-courier-and-mobility.md",
+      "bytes": 1617,
+      "sha256": "5ab98aa24bbfb6497cbe37fc62cd81db282a004f41f13587ed91d88d1453d149"
+    },
+    {
+      "path": "references/12-security-and-abuse.md",
+      "bytes": 3696,
+      "sha256": "8800902b8634a05fdbf7b38ed5cd375b56075fba7193785ecd7116de6788c157"
+    },
+    {
+      "path": "references/13-privacy-and-regulation.md",
+      "bytes": 2580,
+      "sha256": "b172bef69cd20210196789d9d6af47166d998d4f6ad57baf22de2d4ff020504c"
+    },
+    {
+      "path": "references/14-reliability-and-observability.md",
+      "bytes": 2010,
+      "sha256": "743af9f0d014ff86d2155dd9645781c028407dced21b9a317ccdfa8a900c8d3c"
+    },
+    {
+      "path": "references/15-quality-testing.md",
+      "bytes": 2078,
+      "sha256": "b5b3e4aa351b0df86216f6638cb7f84616e9c47afc1daaa4939a3bcf9892cfa2"
+    },
+    {
+      "path": "references/16-launch-operations.md",
+      "bytes": 2059,
+      "sha256": "37585d164bf6fb5a8d0cb0298094607e3988d48ccb50e6d4ed15527a47c47de3"
+    },
+    {
+      "path": "references/17-experience-design.md",
+      "bytes": 2027,
+      "sha256": "99752eec0dbdb9502746d43863007a2d46b73aa6740b50a5e6572697ab9c2559"
+    },
+    {
+      "path": "references/18-support-and-admin.md",
+      "bytes": 1703,
+      "sha256": "87b18a197a01f1ae59791d71d6e50b145c352d123351d3f329024e2fff154a71"
+    },
+    {
+      "path": "references/19-data-and-intelligence.md",
+      "bytes": 1618,
+      "sha256": "3657048e1fc82609ff6bc48c10edc3bd74f055459d73b342a1523e6904a7047b"
+    },
+    {
+      "path": "references/20-growth-and-experiments.md",
+      "bytes": 1561,
+      "sha256": "d5a580ded0f32ca229eeb7765738631598f9acb1667f238ddbbae13d0756fcdf"
+    },
+    {
+      "path": "references/21-edge-cases-and-failure-games.md",
+      "bytes": 2026,
+      "sha256": "f27c31e5629139fd67460f851b0b3b0c2d172155f1cec7176fbf0f6f5503b720"
+    },
+    {
+      "path": "references/22-anti-patterns-and-red-flags.md",
+      "bytes": 2242,
+      "sha256": "c3598be83d311746857f60d93c71f01a9aaf37bba1803ca50aef61bf277aed6d"
+    },
+    {
+      "path": "references/23-context-compaction.md",
+      "bytes": 928,
+      "sha256": "93a55c58eb9112147626afd1d89f8d68eafb50c0bc7f8c16c618c3885c5a5e1b"
+    },
+    {
+      "path": "references/24-enterprise-readiness.md",
+      "bytes": 3525,
+      "sha256": "438778159b781dfd4be785d99491d58eac530fbfecc6544ee97b20f0d1314a5c"
+    },
+    {
+      "path": "references/25-gate-evidence-contract.md",
+      "bytes": 4035,
+      "sha256": "b84ca073b64fbf23b522a827a51eeba3a0e923abc3ef8444b4ad9cf3c3ff7aaa"
+    },
+    {
+      "path": "references/26-skill-supply-chain-and-host.md",
+      "bytes": 3410,
+      "sha256": "0ae6e6d3f3a696a4dbaf395a058b018dc6ed11b7faf3e33268538d632a944aad"
+    },
+    {
+      "path": "references/27-domain-adversarial-contracts.md",
+      "bytes": 3942,
+      "sha256": "7419a512c6ac00113e3741fd984965b8848e6b555b908f5a86036f5eab666844"
+    },
+    {
+      "path": "scripts/build_manifest.py",
+      "bytes": 1838,
+      "sha256": "f432904b2e2dc015bae3ea838e1bbc7985915b5f362a0a8a7e64e9ae817eef93"
+    },
+    {
+      "path": "scripts/common.py",
+      "bytes": 2098,
+      "sha256": "9acc721283a5d147112bd4fee313188b8c1d8c1a8ca18cb099858d807afdd959"
+    },
+    {
+      "path": "scripts/eval_runner.py",
+      "bytes": 2901,
+      "sha256": "b8be5052bcf32bf1473449528e6a9d0771d0ad7ce2239bc2d755ef159eb1adbd"
+    },
+    {
+      "path": "scripts/gate_check.py",
+      "bytes": 7463,
+      "sha256": "e98fb061b8d6a02c8681c0a32a9ca6c915f0661adb34de7e968ba2f1e1213974"
+    },
+    {
+      "path": "scripts/install_claude_agents.py",
+      "bytes": 2939,
+      "sha256": "69928bb4152ccbc8ece10882ac29289b8d44036b0ec8202bbc789e0877b2ad35"
+    },
+    {
+      "path": "scripts/inventory_agents.py",
+      "bytes": 3446,
+      "sha256": "5dc79b0b73f758faab0680fd2ad11c4b6990ea1ee91362f1c39db7f0ab2bcfa0"
+    },
+    {
+      "path": "scripts/package_release.py",
+      "bytes": 3201,
+      "sha256": "b77117da074f82469f877d984d31297340d7ed1af7e715cc81c26f8acc70a4ef"
+    },
+    {
+      "path": "scripts/tests/test_skill_tools.py",
+      "bytes": 9884,
+      "sha256": "a97464dedafb6048f11ce3bc53f31f5004410fd8316f4fc730deae7f787588b0"
+    },
+    {
+      "path": "scripts/validate_pack.py",
+      "bytes": 4614,
+      "sha256": "6c19fb4f25bc1bcc04a45073d0efccf7ff7dcb82ee4b204a0bfdb8ea3b3db867"
+    },
+    {
+      "path": "sources.md",
+      "bytes": 1721,
+      "sha256": "200e1d3cb872156259837167f65f93e496f5bb27b7f9a0cb6738df325028e5c9"
+    },
+    {
+      "path": "templates/adr.md",
+      "bytes": 602,
+      "sha256": "1e9e57f821239df6277fcad30663e799303c10318f9ee206d1b9e88722e8b4ff"
+    },
+    {
+      "path": "templates/agent-handoff.md",
+      "bytes": 468,
+      "sha256": "2e2917579ab592d33b64035bac987ae5ee08237076234e3a623a3cb7614e613e"
+    },
+    {
+      "path": "templates/business-scenarios.csv",
+      "bytes": 422,
+      "sha256": "5d183b4bf6fb882240ea784c8a8765ecc39e5cd95155eef54740bd6937ded771"
+    },
+    {
+      "path": "templates/definition-of-done.md",
+      "bytes": 498,
+      "sha256": "ddea17735efba56d53a7b7253db10f5e7129a427cc2778bb9f78b30912252bab"
+    },
+    {
+      "path": "templates/enterprise-readiness.md",
+      "bytes": 1403,
+      "sha256": "b9a32ffcef461f98b496f4c9d6ef0e9ecd2e96338a12ecd60c28e29c6b78373a"
+    },
+    {
+      "path": "templates/evidence-record.json",
+      "bytes": 386,
+      "sha256": "9c78dff2e4a5de559f494319ff8ce25e520055da3b41f0213c4ef0bef4c6af96"
+    },
+    {
+      "path": "templates/example-payment-event.json",
+      "bytes": 383,
+      "sha256": "5a7555bea7765f59d96211de1044d36cbab823ad5a86f209b0fdd40eff1ad20e"
+    },
+    {
+      "path": "templates/failure-suite.md",
+      "bytes": 310,
+      "sha256": "d0e3bd6713a8dcc60a517391269743424b0fe774d82c0bd24d8d4014fefebc81"
+    },
+    {
+      "path": "templates/gate-report.json",
+      "bytes": 759,
+      "sha256": "d768113b07de0cf544dec1673c3e5770a37f69ba5d7bc900477d1de0f1d51e2e"
+    },
+    {
+      "path": "templates/launch-decision.md",
+      "bytes": 588,
+      "sha256": "61aa5268b0ade17247162b7c758ac6dd90eb55757818de70d7ae0c6a04a0b868"
+    },
+    {
+      "path": "templates/negative-test-catalog.md",
+      "bytes": 702,
+      "sha256": "75ea447d17808aa5452333a5445f085a721040a3ae72377e4f714829c8935a54"
+    },
+    {
+      "path": "templates/risk-register.csv",
+      "bytes": 448,
+      "sha256": "38b78657b6d01d73a15922db5f27dcb225f868c2084d2ff19bfbadfed988804a"
+    },
+    {
+      "path": "templates/task-brief.md",
+      "bytes": 600,
+      "sha256": "5bfc53f840c17b457653da941eb75bfd6cda6b836468e8becdcc2fc0a885de68"
+    },
+    {
+      "path": "templates/technology-scorecard.csv",
+      "bytes": 388,
+      "sha256": "eee09d29ee9f782b5e885760cb0c8183af1efb20ba1beba78f03d5a2290935ef"
+    },
+    {
+      "path": "workflows/agent-waves.md",
+      "bytes": 2625,
+      "sha256": "887cff889a8a453d1f4cceebdb4d2a52b2b9fee264bdd72719b538d2ec573925"
+    },
+    {
+      "path": "workflows/build-vertical-slice.md",
+      "bytes": 1864,
+      "sha256": "79412cf1d50094367d161e718ae950853333aa9e5fa3bee7d6781155956815c0"
+    },
+    {
+      "path": "workflows/continuous-improvement.md",
+      "bytes": 706,
+      "sha256": "0c9216cc37350812e5d912c346c27d013620bb510e43d18b3042ce4386ad9f69"
+    },
+    {
+      "path": "workflows/independent-review.md",
+      "bytes": 1165,
+      "sha256": "745a5c3f2c591b14962c69592e34771cadbd1ec17baff68b9c8a3b6585aa8313"
+    },
+    {
+      "path": "workflows/quality-and-release.md",
+      "bytes": 1098,
+      "sha256": "dd5c8791bec60a2fd8c88e947f0d34c677c6fc2931826820dc01f83672fe8756"
+    },
+    {
+      "path": "workflows/research-and-strategy.md",
+      "bytes": 1092,
+      "sha256": "57f01b4472be4a98ad191ab20a376e0fbb389d4cac189d514cbce6680cfebd7b"
+    },
+    {
+      "path": "workflows/safety-and-legal-gates.md",
+      "bytes": 764,
+      "sha256": "ea28cc67bfe65360910d7addd18d8b0b956bb1d539d95728da7ebd83bc71661e"
+    },
+    {
+      "path": "workflows/technology-selection.md",
+      "bytes": 1187,
+      "sha256": "b293fc298d4119c427162a6a9f04a676a90374d2aee9cecd6166eeb9f7894e32"
+    }
+  ],
+  "note": "integrity verification only, not a cryptographic signature or product security claim"
+}

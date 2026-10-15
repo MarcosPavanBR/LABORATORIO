@@ -1,0 +1,13 @@
+{
+  "event_id": "evt_example_1",
+  "event_type": "payment.captured",
+  "schema_version": 1,
+  "aggregate_id": "pay_example_1",
+  "aggregate_version": 2,
+  "correlation_id": "order_example_1",
+  "occurred_at": "2030-01-01T00:00:00Z",
+  "currency": "BRL",
+  "amount_minor": 1999,
+  "synthetic": true,
+  "warning": "Only a domain event example; not a PSP signature or implementation"
+}

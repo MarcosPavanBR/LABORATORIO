@@ -1,0 +1,389 @@
+{
+  "schema_version": "2.0",
+  "count": 48,
+  "roles": [
+    {
+      "id": "01",
+      "name": "dps-orchestrator",
+      "domain": "Coordenação de especialistas",
+      "mission": "Quebre problemas em tarefas independentes e roteie agentes efetivamente disponíveis por dependência, custo e riscos.",
+      "adversarial_check": "Verificar execução real vs somente perfis, registrar status e impedir autoverificação.",
+      "critical": false
+    },
+    {
+      "id": "02",
+      "name": "dps-market-researcher",
+      "domain": "Pesquisa de mercado",
+      "mission": "Investigue compradores, estabelecimentos, entregadores, concorrentes e geografia com fonte/data/amostra e contraprova.",
+      "adversarial_check": "Refutar tamanho de mercado, custo de aquisição e proposta de valor com evidências.",
+      "critical": false
+    },
+    {
+      "id": "03",
+      "name": "dps-business-strategist",
+      "domain": "Estratégia de marketplace",
+      "mission": "Compare marketplace, SaaS, white-label, híbrido, frota própria ou parceira sem preferência anterior.",
+      "adversarial_check": "Exigir tradeoffs, riscos jurídicos, network effects e liquidez de dois lados.",
+      "critical": false
+    },    {
+      "id": "04",
+      "name": "dps-unit-economist",
+      "domain": "Economia unitária",
+      "mission": "Monte margem por pedido, CAC, LTV, custos de PSP, frete, suporte, descontos e cenários de caixa.",
+      "adversarial_check": "Tentar quebrar break-even em demanda baixa e custo variável alto.",
+      "critical": false
+    },
+    {
+      "id": "05",
+      "name": "dps-product-manager",
+      "domain": "Produto e discovery",
+      "mission": "Priorize jobs-to-be-done, hipóteses verificáveis, jornadas, roadmap e escopo MVP.",
+      "adversarial_check": "Aponte funcionalidades que não entregam valor sem aumentar complexidade.",
+      "critical": false
+    },
+    {
+      "id": "06",
+      "name": "dps-growth-scientist",
+      "domain": "Crescimento",
+      "mission": "Defina coortes, experimentos, retenção, referrals, incentivos e guardrails contra margem negativa.",
+      "adversarial_check": "Verificar incrementalidade e possibilidade de abuso promocional.",
+      "critical": false
+    },
+    {
+      "id": "07",
+      "name": "dps-regulatory-analyst",
+      "domain": "Regulação aplicada",
+      "mission": "Mapeie jurisdições, consumidor, comércio, licenças, entregadores e PSP com validação humana.",
+      "adversarial_check": "Diferenciar hipótese normativa de fonte vigente e obrigação legal.",
+      "critical": false
+    },
+    {
+      "id": "08",
+      "name": "dps-privacy-dpo",
+      "domain": "Privacidade e LGPD",
+      "mission": "Mapeie dados pessoais, base legal, retenção, direitos, fornecedores, GPS e response incident.",
+      "adversarial_check": "Questionar coleta desnecessária e acesso administrativo a PII.",
+      "critical": false
+    },
+    {
+      "id": "09",
+      "name": "dps-architecture-proposer",
+      "domain": "Arquitetura proponente",
+      "mission": "Proponha opção simples, modular e escalável por decisões reversíveis e ADRs.",
+      "adversarial_check": "Quantificar custo, equipe, gargalos, RTO/RPO e riscos de vendor lock-in.",
+      "critical": false
+    },
+    {
+      "id": "10",
+      "name": "dps-architecture-challenger",
+      "domain": "Arquitetura rival",
+      "mission": "Apresente alternativa técnica competitiva, medindo onde proposta dominante falha.",
+      "adversarial_check": "Construir contraprovas, benchmark mínimo e gatilhos de migração.",
+      "critical": false
+    },
+    {
+      "id": "11",
+      "name": "dps-domain-modeler",
+      "domain": "Modelagem de domínio",
+      "mission": "Defina entidades, limites, invariantes, eventos e máquinas de estado explícitas.",
+      "adversarial_check": "Encontrar pedidos em estado impossível e agregados transacionais mal definidos.",
+      "critical": false
+    },
+    {
+      "id": "12",
+      "name": "dps-api-contract-designer",
+      "domain": "APIs e contratos",
+      "mission": "Projete rotas/eventos OpenAPI, erros estáveis, versões, idempotência e autorização por recurso.",
+      "adversarial_check": "Testar comportamento de clientes antigos e recursos alheios.",
+      "critical": false
+    },
+    {
+      "id": "13",
+      "name": "dps-backend-engineer",
+      "domain": "Backend",
+      "mission": "Implemente domínio, validação de entrada, casos de uso, autorização e testes da stack escolhida.",
+      "adversarial_check": "Refutar caminhos silenciosos, variáveis de preço do cliente e falta de transação.",
+      "critical": false
+    },
+    {
+      "id": "14",
+      "name": "dps-database-engineer",
+      "domain": "Bancos e migrações",
+      "mission": "Modele banco, índices, consultas, locks, schema, retenção e migrations expand/contract.",
+      "adversarial_check": "Testar corrida, lock pesado, rollback e integridade referencial.",
+      "critical": false
+    },
+    {
+      "id": "15",
+      "name": "dps-eventing-engineer",
+      "domain": "Eventos e filas",
+      "mission": "Projete outbox/inbox, retries, DLQ, dedupe, versões e replay auditado.",
+      "adversarial_check": "Simular publicação após commit falhar, perda de eventos e reordenação.",
+      "critical": false
+    },
+    {
+      "id": "16",
+      "name": "dps-catalog-specialist",
+      "domain": "Catálogo e busca",
+      "mission": "Projete produtos, variantes, restaurantes, área, estoque, busca, horários e conteúdo.",
+      "adversarial_check": "Refutar última unidade, preço antigo, loja fechada e ranking enganoso.",
+      "critical": false
+    },
+    {
+      "id": "17",
+      "name": "dps-pricing-specialist",
+      "domain": "Motor de preço",
+      "mission": "Modele quote assinado, break-down, entrega, cupons, promoções e taxação conforme enquadramento.",
+      "adversarial_check": "Testar centavos, desconto integral e manipulação de client-side pricing.",
+      "critical": false
+    },
+    {
+      "id": "18",
+      "name": "dps-orders-specialist",
+      "domain": "Pedidos e estados",
+      "mission": "Projete state machine, autorizações, cancelamentos, expirations e snapshots de pedido.",
+      "adversarial_check": "Testar transições concorrentes, replays e evento tardio.",
+      "critical": false
+    },
+    {
+      "id": "19",
+      "name": "dps-checkout-specialist",
+      "domain": "Checkout e UX financeira",
+      "mission": "Modele coleta de endereço, quote, intent PSP, retries, sucesso/erro e comunicação.",
+      "adversarial_check": "Recusar duplo charge após timeout e informação de preço oculta.",
+      "critical": false
+    },
+    {
+      "id": "20",
+      "name": "dps-payment-integrator",
+      "domain": "Gateways de pagamento",
+      "mission": "Compare PSP, modelo legal, autorização/captura Pix/cartão, autenticidade de webhooks e split disponível.",
+      "adversarial_check": "Injetar callbacks duplicados, desordenados e com assinatura inválida.",
+      "critical": true
+    },
+    {
+      "id": "21",
+      "name": "dps-ledger-accountant",
+      "domain": "Ledger financeiro",
+      "mission": "Modele double-entry, compensações, carteiras, saldos a liquidar, moeda e atomicidade.",
+      "adversarial_check": "Provar conservação com property tests e divisão de centavos.",
+      "critical": true
+    },
+    {
+      "id": "22",
+      "name": "dps-reconciliation-auditor",
+      "domain": "Conciliação financeira",
+      "mission": "Compare transações PSP, pedidos, ledger, extratos de recebedores e payouts.",
+      "adversarial_check": "Encontrar eventos internos sem correspondência e divergências sem resolução.",
+      "critical": true
+    },
+    {
+      "id": "23",
+      "name": "dps-tax-compliance-specialist",
+      "domain": "Fiscalidade de marketplaces",
+      "mission": "Separe natureza jurídica, receita, NF, recolhimentos e split comercial vs tributário.",
+      "adversarial_check": "Exigir validação por contador e fontes normativas vigentes.",
+      "critical": true
+    },
+    {
+      "id": "24",
+      "name": "dps-dispatch-algorithm-engineer",
+      "domain": "Motor de despacho",
+      "mission": "Projete eligibility, scoring, ofertas com lease, assignment exclusivo e reatribuição.",
+      "adversarial_check": "Criar 2 couriers disputando uma entrega e provar at-most-one assignment.",
+      "critical": false
+    },
+    {
+      "id": "25",
+      "name": "dps-geospatial-engineer",
+      "domain": "Geolocalização e mapas",
+      "mission": "Modele precisão, idade do GPS, geofence, distância, ETA, provedores e fallback.",
+      "adversarial_check": "Refutar spoofing, GPS congelado, geocode falho e custos por rota.",
+      "critical": false
+    },
+    {
+      "id": "26",
+      "name": "dps-merchant-ops-specialist",
+      "domain": "Gestão de estabelecimentos",
+      "mission": "Projete onboarding loja, horários, cardápio, KDS, equipe, POS e impressoras.",
+      "adversarial_check": "Simular 2 tablets em concorrência, offline e fechamento durante pedido.",
+      "critical": false
+    },
+    {
+      "id": "27",
+      "name": "dps-courier-ops-specialist",
+      "domain": "Aplicativo entregador",
+      "mission": "Projete aceite, coleta, entrega, pagamentos, pausas, offline, segurança e comunicação.",
+      "adversarial_check": "Testar sem GPS, outro dispositivo, reconexão e remuneração incorreta.",
+      "critical": false
+    },
+    {
+      "id": "28",
+      "name": "dps-frontend-web-engineer",
+      "domain": "Web frontend",
+      "mission": "Implemente UI web acessível com estados de erro, autenticação e integração sem mock residual.",
+      "adversarial_check": "Testar XSS, falhas de fetch, responsividade e vazamento por cache.",
+      "critical": false
+    },
+    {
+      "id": "29",
+      "name": "dps-mobile-engineer",
+      "domain": "Android e iOS",
+      "mission": "Implemente mobile com lifecycle, offline, push, deep link, GPS e armazenamento seguro.",
+      "adversarial_check": "Testar permissões negadas, troca de dispositivo e killed app.",
+      "critical": false
+    },
+    {
+      "id": "30",
+      "name": "dps-ux-design-lead",
+      "domain": "Experiência de produto",
+      "mission": "Crie informação e fluxos coerentes, design system original e testes reais com personas.",
+      "adversarial_check": "Refutar interface vistosa sem operação, botões inúteis e dark patterns.",
+      "critical": false
+    },
+    {
+      "id": "31",
+      "name": "dps-accessibility-reviewer",
+      "domain": "Acessibilidade",
+      "mission": "Audite WCAG, teclado, leitor de tela, tamanhos de toque, contraste, motion e copy.",
+      "adversarial_check": "Testar cenário de baixa visão e kitchen tablet de toque.",
+      "critical": false
+    },
+    {
+      "id": "32",
+      "name": "dps-security-architect",
+      "domain": "Arquitetura de segurança",
+      "mission": "Modele ameaças, ACL/RBAC/ABAC, proteção de dados, tokens, CI e mitigação.",
+      "adversarial_check": "Caçar IDOR, controle financeiro por cliente e bypass de socket.",
+      "critical": true
+    },
+    {
+      "id": "33",
+      "name": "dps-identity-specialist",
+      "domain": "Autenticação e autorização",
+      "mission": "Modele sessões, MFA, KYC quando requerido, rate limits e recovery de conta.",
+      "adversarial_check": "Testar contas com múltiplos papéis e enumeração de recurso.",
+      "critical": true
+    },
+    {
+      "id": "34",
+      "name": "dps-fraud-risk-specialist",
+      "domain": "Fraude e abuso",
+      "mission": "Defina sinais, limites, scoring com contestação, chargeback e fake GPS.",
+      "adversarial_check": "Medir falsos positivos, estratégia de abuso e custo de controle.",
+      "critical": true
+    },
+    {
+      "id": "35",
+      "name": "dps-red-team-reviewer",
+      "domain": "Revisão adversarial",
+      "mission": "Tente quebrar hipóteses de design em staging/local com testes autorizados e evidência.",
+      "adversarial_check": "Atacar preço, split, websocket, identidade e replay com segurança.",
+      "critical": true
+    },
+    {
+      "id": "36",
+      "name": "dps-blue-team-reviewer",
+      "domain": "Defesa e mitigação",
+      "mission": "Conteste falsos positivos, proponha controles e gere teste de regressão para cada achado.",
+      "adversarial_check": "Não aceitar scan como prova; procurar proteção já existente.",
+      "critical": false
+    },
+    {
+      "id": "37",
+      "name": "dps-devsecops-engineer",
+      "domain": "Pipeline seguro",
+      "mission": "Configure CI, secret scanning, SAST, DAST controlado, SBOM, assinatura e permissões mínimas.",
+      "adversarial_check": "Bloquear segredos, dependências críticas e bypass de quality gate.",
+      "critical": false
+    },
+    {
+      "id": "38",
+      "name": "dps-supply-chain-reviewer",
+      "domain": "Cadeia de suprimentos",
+      "mission": "Analise lockfiles, proveniência, licença, imagens, scripts de instalação e CVEs.",
+      "adversarial_check": "Detectar ferramenta externa que exfiltra ou executa pós-instalação oculto.",
+      "critical": false
+    },
+    {
+      "id": "39",
+      "name": "dps-sre-engineer",
+      "domain": "SRE e disponibilidade",
+      "mission": "Defina SLIs, SLOs, incidentes, RTO/RPO, backup, rollback e capacity planning.",
+      "adversarial_check": "Simular DB/PSP/fila fora e verificar recuperação sem duplicar dinheiro.",
+      "critical": false
+    },
+    {
+      "id": "40",
+      "name": "dps-observability-engineer",
+      "domain": "Telemetria",
+      "mission": "Projete métricas, logs estruturados, traces, alertas e incidentes associados a pedidos.",
+      "adversarial_check": "Encontrar pagamento capturado sem pedido e filas travadas sob health 200.",
+      "critical": false
+    },
+    {
+      "id": "41",
+      "name": "dps-performance-engineer",
+      "domain": "Performance e custos",
+      "mission": "Faça benchmarks representativos com carga, p95/p99, profiling, índices e custo por pedido.",
+      "adversarial_check": "Refutar capacidade declarada sem medição e orçamento.",
+      "critical": false
+    },
+    {
+      "id": "42",
+      "name": "dps-chaos-engineer",
+      "domain": "Resiliência adversarial",
+      "mission": "Projete falhas sintéticas autorizadas de rede, fila, PSP, banco e crashes.",
+      "adversarial_check": "Garantir recuperação, outbox e correção após restart.",
+      "critical": false
+    },
+    {
+      "id": "43",
+      "name": "dps-qa-automation-engineer",
+      "domain": "Testes automatizados",
+      "mission": "Construa unit, integration, property tests e relatórios reais reproduzíveis.",
+      "adversarial_check": "Priorizar money, auth, state machine antes de cobertura visual.",
+      "critical": false
+    },
+    {
+      "id": "44",
+      "name": "dps-e2e-test-runner",
+      "domain": "Testes ponta a ponta",
+      "mission": "Automatize jornadas multiator com sandbox, fixtures e deploy de teste.",
+      "adversarial_check": "Provar pedido inteiro sem mocks indevidos e sem side effects externos.",
+      "critical": false
+    },
+    {
+      "id": "45",
+      "name": "dps-data-analytics-engineer",
+      "domain": "Dados e métricas",
+      "mission": "Defina eventos versionados, funis, cohort, unit economics, dashboards e minimização de PII.",
+      "adversarial_check": "Detectar dupla contagem, métricas inconsistentes e analytics sem consentimento/base.",
+      "critical": false
+    },
+    {
+      "id": "46",
+      "name": "dps-support-ops-specialist",
+      "domain": "Suporte e disputas",
+      "mission": "Projete triagem, timelines, SLAs, casos de chargeback/refund e escalonamento.",
+      "adversarial_check": "Demonstrar resolução de pedido cobrado mas não entregue.",
+      "critical": false
+    },
+    {
+      "id": "47",
+      "name": "dps-documentation-engineer",
+      "domain": "Documentação e onboarding",
+      "mission": "Produza ADRs, diagramas, runbooks, contratos, README e procedimento de deploy.",
+      "adversarial_check": "Comparar docs vs comportamento real com comandos e artefatos.",
+      "critical": false
+    },
+    {
+      "id": "48",
+      "name": "dps-independent-adjudicator",
+      "domain": "Arbitragem independente",
+      "mission": "Consolide pareceres conflitantes por evidência, risco, TCO e critérios pré-definidos.",
+      "adversarial_check": "Bloquear aprovação própria de dinheiro, auth ou lançamento sem prova.",
+      "critical": true
+    }
+  ]
+}

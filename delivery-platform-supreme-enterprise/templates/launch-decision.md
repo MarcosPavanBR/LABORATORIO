@@ -1,0 +1,13 @@
+# GO/NO-GO — <produto, versão, região>
+- Data/hora/owner de decisão:
+- Versão/commit e ambientes verificados:
+- Evidência de backup RESTORE e rollback:
+- Evidência de conciliação PSP / ledger / repasses:
+- Testes de status/pedido/despacho e acesso por recurso:
+- Conformidade jurídica/fiscal humana:
+- Equipe de suporte e responsável por incidentes:
+- Último gate-report + fingerprint:
+- Incidentes/bloqueios P0/P1 restantes:
+- Critérios de rollback e kill switches:
+- Aprovador humano explícito:
+- Decisão: NO-GO até existir documentação real de cada item bloqueante.

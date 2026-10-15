@@ -1,0 +1,9 @@
+criterion,weight_defined_before,option_A_score_0_to_5,option_A_evidence,option_B_score_0_to_5,option_B_evidence,option_C_score_0_to_5,option_C_evidence,confidence,risk_note
+integrity,0.20,,,,,,,,
+team_productivity,0.15,,,,,,,,
+availability,0.15,,,,,,,,
+total_cost_12_36m,0.15,,,,,,,,
+security,0.15,,,,,,,,
+operational_burden,0.10,,,,,,,,
+portability,0.05,,,,,,,,
+performance,0.05,,,,,,,,

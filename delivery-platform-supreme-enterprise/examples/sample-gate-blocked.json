@@ -1,0 +1,6 @@
+{
+  "gate":"G9","profile":"enterprise","commit":"UNSET","p0_open":1,"p1_open":2,
+  "critical_cases":[{"id":"checkout-e2e","status":"NOT_RUN","source":"automated-test","executed_by":"NOT_INVOKED","evidence_path":"","sha256":""}],
+  "prerequisite_gates":[],"artifacts":[],
+  "human_approval":{"approved":false,"approver":"","timestamp":"","scope":""}
+}

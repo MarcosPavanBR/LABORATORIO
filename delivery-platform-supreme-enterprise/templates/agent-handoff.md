@@ -1,0 +1,20 @@
+# Handoff de agente
+- task_id:
+- agent_name:
+- executor_invoked: # executor real, não só arquivo md
+- independent_execution: false
+- role / escopo:
+- inputs (paths/hash):
+- work_done:
+- files_changed:
+- decisions + tradeoffs:
+- verification_commands:
+- expected_results:
+- observed_results:
+- evidence_paths:
+- counterexamples_checked:
+- contradictory_evidence:
+- non_executed_checks:
+- risks_open:
+- verdict: NOT_RUN # PASS / WARN / BLOCKED / NOT_RUN
+- handoff_to:

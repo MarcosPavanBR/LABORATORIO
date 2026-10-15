@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "product": "UNSET",
+  "commit": "UNSET",
+  "gate": "G6",
+  "evaluated_by": "UNSET",
+  "critical_cases": [
+    {"id": "double-charge", "status": "NOT_RUN", "evidence_path": ""},
+    {"id": "ledger-balance", "status": "NOT_RUN", "evidence_path": ""},
+    {"id": "webhook-replay", "status": "NOT_RUN", "evidence_path": ""},
+    {"id": "resource-authorization", "status": "NOT_RUN", "evidence_path": ""},
+    {"id": "state-machine", "status": "NOT_RUN", "evidence_path": ""},
+    {"id": "courier-acceptance-race", "status": "NOT_RUN", "evidence_path": ""}
+  ],
+  "p0_open": 0,
+  "p1_open": 0,
+  "human_approval": false,
+  "production_request": false,
+  "notes": "Template intentionally BLOCKED until actual evidence is supplied."
+}
