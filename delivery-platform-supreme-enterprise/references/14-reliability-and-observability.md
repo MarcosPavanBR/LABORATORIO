@@ -5,6 +5,7 @@ SLIs: sucesso pedido por tentativa; pedido pago mas não criado; tempo de aceite
 
 ## Sinais operacionais
 Logs estruturados (`request_id`, `correlation_id`, `order_id` pseudonimizado conforme política), métricas RED/USE, tracing distribuído, alertas por causa acionável, dashboards por cidade/loja/PSP e incidentes. Dinheiro e pedido têm invariantes monitoradas, não só CPU/HTTP 200. Alertar `payment captured AND no valid order after grace period`, `ledger imbalance`, `assignment_count >1`, `queue_oldest_age`, `unreconciled_amount`.
+
 ## Resiliência
 Timeout e retry budgets, outbox, dedupe, DLQ, circuit breaker, graceful shutdown, limites de conexões, proteção contra overload, autoscale baseado em fila/latência, backups PITR se aplicável, restauração comprovada, dependências multi-AZ conforme custo e RTO/RPO realistas. Ensaio de caos em staging: desligar DB, perder fila, PSP timeout, mapa down, WS desconecta, processo restart antes da publicação outbox. Verificar que nenhuma captura gera perdido/duplicado.
 

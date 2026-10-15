@@ -25,7 +25,8 @@
       "mission": "Compare marketplace, SaaS, white-label, híbrido, frota própria ou parceira sem preferência anterior.",
       "adversarial_check": "Exigir tradeoffs, riscos jurídicos, network effects e liquidez de dois lados.",
       "critical": false
-    },    {
+    },
+    {
       "id": "04",
       "name": "dps-unit-economist",
       "domain": "Economia unitária",

@@ -1,0 +1,38 @@
+name: Validate Delivery Platform Supreme Skill
+
+on:
+  push:
+    paths:
+      - 'delivery-platform-supreme-enterprise/**'
+      - '.github/workflows/validate-delivery-platform-skill.yml'
+  pull_request:
+    paths:
+      - 'delivery-platform-supreme-enterprise/**'
+      - '.github/workflows/validate-delivery-platform-skill.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate package, unit tests and integrity
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: delivery-platform-supreme-enterprise
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate skill structure
+        run: python3 scripts/validate_pack.py
+      - name: Execute tool tests
+        run: python3 -m unittest discover -s scripts/tests -v
+      - name: Check evaluation catalogue
+        run: python3 scripts/eval_runner.py
+      - name: Verify integrity manifest
+        run: python3 scripts/build_manifest.py --verify

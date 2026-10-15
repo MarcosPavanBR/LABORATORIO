@@ -34,7 +34,8 @@ class TestSkillValidation(unittest.TestCase):
         self.assertEqual(len(r['roles']),48)
         self.assertEqual(len({x['name'] for x in r['roles']}),48)
     def test_missing_reference_does_not_validate(self):
-        with tempfile.TemporaryDirectory() as tmp:            dest=Path(tmp)/ROOT.name
+        with tempfile.TemporaryDirectory() as tmp:
+            dest=Path(tmp)/ROOT.name
             shutil.copytree(ROOT,dest,ignore=shutil.ignore_patterns('__pycache__'))
             (dest/'references/01-multiagent-governance.md').unlink()
             self.assertTrue(any('broken SKILL.md link' in e for e in validate(dest)))

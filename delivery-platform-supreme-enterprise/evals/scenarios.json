@@ -611,7 +611,8 @@
     "id": "REL-03",
     "phase": "G9",
     "prompt": "Um artefato da CI foi alterado após revisão.",
-    "risk": "Evidência",    "required_signals": [
+    "risk": "Evidência",
+    "required_signals": [
       "hash",
       "integridade",
       "bloquear"
