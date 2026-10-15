@@ -154,3 +154,10 @@ export const categoryData = [
   { name: 'Bebidas', value: 15, color: '#3498DB' },
   { name: 'Sobremesas', value: 12, color: '#2ECC71' },
 ];
+
+export const mockCoupons = [
+  { code: 'FLASH20', discount: 20, minOrder: 50, validUntil: new Date('2026-12-31'), active: true, description: '20% de desconto em pedidos acima de R$ 50' },
+  { code: 'PRIMEIRACOMPRA', discount: 15, validUntil: new Date('2026-12-31'), active: true, description: '15% de desconto na primeira compra' },
+  { code: 'FRETEGRATIS', discount: 100, minOrder: 30, validUntil: new Date('2026-06-30'), active: true, description: 'Frete grátis em pedidos acima de R$ 30' },
+  { code: 'VIP10', discount: 10, validUntil: new Date('2026-12-31'), active: true, description: '10% de desconto para clientes VIP' },
+];

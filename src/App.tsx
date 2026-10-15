@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
+import { ToastProvider } from './components/Toast';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import ClientApp from './pages/ClientApp';
@@ -28,7 +29,9 @@ const AppContent: React.FC = () => {
 function App() {
   return (
     <AppProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </AppProvider>
   );
 }

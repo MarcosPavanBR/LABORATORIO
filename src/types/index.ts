@@ -98,3 +98,22 @@ export interface Notification {
   read: boolean;
   createdAt: Date;
 }
+
+export interface Coupon {
+  code: string;
+  discount: number;
+  minOrder?: number;
+  maxDiscount?: number;
+  validUntil: Date;
+  active: boolean;
+  description?: string;
+}
+
+export interface Review {
+  id: string;
+  orderId: string;
+  rating: number;
+  comment?: string;
+  createdAt: Date;
+  customerName: string;
+}

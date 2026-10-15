@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
+import { useToast } from '../components/Toast';
+import { Modal } from '../components/Modal';
+import { TrackingMap } from '../components/TrackingMap';
 import { Logo } from '../components/Logo';
 import { Button, Card, Badge, Avatar } from '../components/ui';
 import { mockMenuItems, mockRestaurant, mockCustomers } from '../data/mockData';
 import { processPaymentWithSplit } from '../services/asaasService';
 import { Order } from '../types';
 import {
-  ArrowLeft, ShoppingCart, Plus, Minus, Trash2, Search, MapPin,
-  CreditCard, Smartphone, Banknote, Check, Loader, Star, Clock,
-  X, Home, Receipt, User, ChevronRight, Navigation, Phone, MessageCircle
+  ArrowLeft, ShoppingCart, Plus, Minus, Search, MapPin,
+  CreditCard, Smartphone, Check, Loader, Star, Clock,
+  Home, Receipt, User, ChevronRight, Navigation, Phone,
+  MessageCircle, Heart, Tag, Gift, Award, X
 } from 'lucide-react';
 
-type ClientView = 'menu' | 'cart' | 'checkout' | 'tracking' | 'success' | 'orders' | 'profile';
+type ClientView = 'menu' | 'cart' | 'checkout' | 'tracking' | 'success' | 'orders' | 'profile' | 'favorites' | 'review';
 
 const ClientApp: React.FC = () => {
-  const { setView, cart, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, getCartSubtotal, addOrder, orders } = useApp();
+  const { setView, cart, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, getCartSubtotal, addOrder, orders, toggleFavorite, isFavorite, applyCoupon, removeCoupon, appliedCoupon, loyaltyPoints, addLoyaltyPoints } = useApp();
+  const { showToast } = useToast();
   const [view, setClientView] = useState<ClientView>('menu');
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [searchTerm, setSearchTerm] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'credit_card' | 'debit_card' | 'pix' | 'cash'>('credit_card');
   const [processing, setProcessing] = useState(false);
   const [currentOrder, setCurrentOrder] = useState<Order | null>(null);
+  const [couponModalOpen, setCouponModalOpen] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState('');
 
   const categories = ['Todos', ...mockRestaurant.categories];
   const filteredItems = mockMenuItems.filter(item => {
@@ -53,10 +62,23 @@ const ClientApp: React.FC = () => {
       };
       addOrder(order);
       setCurrentOrder(order);
+      addLoyaltyPoints(Math.floor(totalWithDelivery));
       setClientView('success');
       clearCart();
+      removeCoupon();
+      showToast({ type: 'success', title: 'Pedido confirmado!', message: 'Split Asaas processado com sucesso' });
     }
     setProcessing(false);
+  };
+
+  const handleApplyCoupon = () => {
+    if (applyCoupon(couponCode)) {
+      showToast({ type: 'success', title: 'Cupom aplicado!', message: 'Desconto adicionado ao pedido' });
+      setCouponModalOpen(false);
+      setCouponCode('');
+    } else {
+      showToast({ type: 'error', title: 'Cupom inválido', message: 'Verifique o código e tente novamente' });
+    }
   };
 
   const getItemQuantity = (itemId: string) => cart.find(i => i.id === itemId)?.quantity || 0;
@@ -76,25 +98,26 @@ const ClientApp: React.FC = () => {
 
   // Bottom Navigation
   const BottomNav = () => (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-flash-gray-200 z-40 safe-area-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-flash-gray-200 z-40">
       <div className="max-w-lg mx-auto flex items-center justify-around py-2">
         {[
           { id: 'menu' as const, icon: <Home size={20} />, label: 'Início' },
           { id: 'cart' as const, icon: <ShoppingCart size={20} />, label: 'Carrinho', badge: cart.length },
           { id: 'orders' as const, icon: <Receipt size={20} />, label: 'Pedidos' },
+          { id: 'favorites' as const, icon: <Heart size={20} />, label: 'Favoritos' },
           { id: 'profile' as const, icon: <User size={20} />, label: 'Perfil' },
         ].map(tab => (
           <button
             key={tab.id}
             onClick={() => setClientView(tab.id)}
-            className={`flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all relative ${
+            className={`flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl transition-all relative ${
               view === tab.id ? 'text-flash-orange' : 'text-flash-gray-400'
             }`}
           >
             {tab.icon}
             <span className="text-[10px] font-medium">{tab.label}</span>
             {tab.badge && tab.badge > 0 && (
-              <span className="absolute -top-0.5 right-2 w-4 h-4 bg-flash-orange text-white text-[9px] rounded-full flex items-center justify-center font-bold">
+              <span className="absolute -top-0.5 right-1 w-4 h-4 bg-flash-orange text-white text-[9px] rounded-full flex items-center justify-center font-bold">
                 {tab.badge}
               </span>
             )}
@@ -108,7 +131,6 @@ const ClientApp: React.FC = () => {
   if (view === 'menu') {
     return (
       <div className="min-h-screen bg-flash-gray-50 pb-20">
-        {/* Header */}
         <header className="bg-white sticky top-0 z-30 border-b border-flash-gray-100">
           <div className="max-w-lg mx-auto px-4 py-3">
             <div className="flex items-center justify-between mb-3">
@@ -123,9 +145,14 @@ const ClientApp: React.FC = () => {
                   <p className="text-sm font-semibold text-flash-gray-900">Av. Paulista, 1000</p>
                 </div>
               </div>
-              <Logo size="xs" showText={false} />
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 bg-flash-orange-50 px-2 py-1 rounded-full">
+                  <Award size={12} className="text-flash-orange" />
+                  <span className="text-xs font-bold text-flash-orange">{loyaltyPoints}</span>
+                </div>
+                <Logo size="xs" showText={false} />
+              </div>
             </div>
-            {/* Search */}
             <div className="relative">
               <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-flash-gray-400" />
               <input
@@ -151,7 +178,6 @@ const ClientApp: React.FC = () => {
                   <div className="flex items-center gap-3 text-sm text-white/80">
                     <span className="flex items-center gap-1"><Star size={12} fill="white" /> {mockRestaurant.rating}</span>
                     <span className="flex items-center gap-1"><Clock size={12} /> {mockRestaurant.deliveryTime}</span>
-                    <span>• {mockRestaurant.totalReviews} avaliações</span>
                   </div>
                 </div>
               </div>
@@ -191,8 +217,14 @@ const ClientApp: React.FC = () => {
                     key={item.id}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => addToCart(item)}
-                    className="flex-shrink-0 w-36 bg-white rounded-2xl p-3 border border-flash-gray-100 cursor-pointer hover:border-flash-orange/30 transition-all"
+                    className="flex-shrink-0 w-36 bg-white rounded-2xl p-3 border border-flash-gray-100 cursor-pointer hover:border-flash-orange/30 transition-all relative"
                   >
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleFavorite(item.id); }}
+                      className="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-sm"
+                    >
+                      <Heart size={12} className={isFavorite(item.id) ? 'text-flash-red fill-flash-red' : 'text-flash-gray-400'} />
+                    </button>
                     <div className="text-4xl text-center mb-2">{item.emoji}</div>
                     <p className="text-xs font-semibold text-flash-gray-900 line-clamp-1">{item.name}</p>
                     <p className="text-xs font-bold text-flash-orange mt-1">R$ {item.price.toFixed(2)}</p>
@@ -214,8 +246,14 @@ const ClientApp: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white rounded-2xl p-4 border border-flash-gray-100 flex gap-4 hover:border-flash-orange/20 transition-all"
               >
-                <div className="text-4xl w-16 h-16 bg-flash-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="text-4xl w-16 h-16 bg-flash-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 relative">
                   {item.emoji}
+                  <button
+                    onClick={() => toggleFavorite(item.id)}
+                    className="absolute -top-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-sm"
+                  >
+                    <Heart size={12} className={isFavorite(item.id) ? 'text-flash-red fill-flash-red' : 'text-flash-gray-400'} />
+                  </button>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
@@ -238,11 +276,11 @@ const ClientApp: React.FC = () => {
                     </div>
                     {getItemQuantity(item.id) > 0 ? (
                       <div className="flex items-center gap-2 bg-flash-orange-50 rounded-full px-1 py-0.5">
-                        <button onClick={() => updateQuantity(item.id, getItemQuantity(item.id) - 1)} className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-flash-gray-100">
+                        <button onClick={() => updateQuantity(item.id, getItemQuantity(item.id) - 1)} className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm">
                           <Minus size={12} />
                         </button>
                         <span className="font-bold text-xs w-4 text-center text-flash-orange">{getItemQuantity(item.id)}</span>
-                        <button onClick={() => addToCart(item)} className="w-7 h-7 rounded-full bg-flash-orange text-white flex items-center justify-center shadow-sm hover:bg-flash-orange-dark">
+                        <button onClick={() => addToCart(item)} className="w-7 h-7 rounded-full bg-flash-orange text-white flex items-center justify-center shadow-sm">
                           <Plus size={12} />
                         </button>
                       </div>
@@ -327,17 +365,46 @@ const ClientApp: React.FC = () => {
                       <p className="text-flash-orange font-bold text-sm">R$ {(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-8 h-8 rounded-full bg-flash-gray-100 flex items-center justify-center hover:bg-flash-gray-200 transition-colors">
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-8 h-8 rounded-full bg-flash-gray-100 flex items-center justify-center">
                         <Minus size={14} />
                       </button>
                       <span className="font-bold text-sm w-5 text-center">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-8 h-8 rounded-full bg-flash-orange text-white flex items-center justify-center hover:bg-flash-orange-dark transition-colors">
+                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-8 h-8 rounded-full bg-flash-orange text-white flex items-center justify-center">
                         <Plus size={14} />
                       </button>
                     </div>
                   </motion.div>
                 ))}
               </div>
+
+              {/* Coupon */}
+              <Card className="mb-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-flash-orange-50 rounded-xl flex items-center justify-center">
+                      <Tag size={18} className="text-flash-orange" />
+                    </div>
+                    <div>
+                      {appliedCoupon ? (
+                        <>
+                          <p className="text-sm font-semibold text-flash-green">Cupom {appliedCoupon.code} aplicado!</p>
+                          <p className="text-xs text-flash-gray-500">{appliedCoupon.discount}% de desconto</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-sm font-semibold text-flash-gray-900">Tem um cupom?</p>
+                          <p className="text-xs text-flash-gray-500">Adicione seu código de desconto</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  {appliedCoupon ? (
+                    <button onClick={removeCoupon} className="text-flash-red text-xs font-semibold">Remover</button>
+                  ) : (
+                    <button onClick={() => setCouponModalOpen(true)} className="text-flash-orange text-xs font-semibold">Aplicar</button>
+                  )}
+                </div>
+              </Card>
 
               {/* Delivery Address */}
               <Card className="mb-4">
@@ -358,6 +425,9 @@ const ClientApp: React.FC = () => {
                 <h3 className="font-semibold text-sm mb-3">Resumo do pedido</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between"><span className="text-flash-gray-500">Subtotal</span><span>R$ {subtotal.toFixed(2)}</span></div>
+                  {appliedCoupon && (
+                    <div className="flex justify-between text-flash-green"><span>Desconto ({appliedCoupon.discount}%)</span><span>-R$ {(subtotal - getCartSubtotal()).toFixed(2)}</span></div>
+                  )}
                   <div className="flex justify-between"><span className="text-flash-gray-500">Taxa de entrega</span><span className="text-flash-green">R$ {deliveryFee.toFixed(2)}</span></div>
                   <div className="border-t border-flash-gray-100 pt-2 flex justify-between font-bold">
                     <span>Total</span><span className="text-flash-orange text-lg">R$ {totalWithDelivery.toFixed(2)}</span>
@@ -372,6 +442,31 @@ const ClientApp: React.FC = () => {
           )}
         </div>
         <BottomNav />
+
+        {/* Coupon Modal */}
+        <Modal isOpen={couponModalOpen} onClose={() => setCouponModalOpen(false)} title="Aplicar Cupom">
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-flash-gray-700 mb-1.5 block">Código do cupom</label>
+              <input
+                type="text"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                placeholder="Digite seu cupom"
+                className="input-field"
+              />
+            </div>
+            <div className="bg-flash-gray-50 rounded-xl p-3">
+              <p className="text-xs text-flash-gray-500 mb-2">Cupons disponíveis:</p>
+              <div className="space-y-1 text-xs">
+                <p className="text-flash-gray-600">• FLASH20 - 20% off (min. R$ 50)</p>
+                <p className="text-flash-gray-600">• PRIMEIRACOMPRA - 15% off</p>
+                <p className="text-flash-gray-600">• FRETEGRATIS - Frete grátis</p>
+              </div>
+            </div>
+            <Button variant="primary" fullWidth onClick={handleApplyCoupon}>Aplicar Cupom</Button>
+          </div>
+        </Modal>
       </div>
     );
   }
@@ -388,7 +483,6 @@ const ClientApp: React.FC = () => {
         </header>
 
         <div className="max-w-lg mx-auto px-4 py-4">
-          {/* Payment Methods */}
           <Card className="mb-4">
             <h3 className="font-semibold text-sm mb-3">Forma de pagamento</h3>
             <div className="space-y-2">
@@ -417,7 +511,6 @@ const ClientApp: React.FC = () => {
             </div>
           </Card>
 
-          {/* Split Info */}
           <Card className="mb-4 bg-gradient-to-r from-purple-50 to-blue-50 border-purple-100">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-base">⚡</span>
@@ -430,7 +523,6 @@ const ClientApp: React.FC = () => {
             </div>
           </Card>
 
-          {/* Order Summary */}
           <Card className="mb-6">
             <h3 className="font-semibold text-sm mb-3">Itens do pedido</h3>
             <div className="space-y-2 text-sm">
@@ -505,21 +597,9 @@ const ClientApp: React.FC = () => {
         </header>
 
         <div className="max-w-lg mx-auto px-4 py-4">
-          {/* Map placeholder */}
-          <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl h-44 flex items-center justify-center mb-4 relative overflow-hidden border border-blue-100">
-            <div className="absolute inset-0 opacity-30">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="absolute w-1.5 h-1.5 bg-blue-400 rounded-full" style={{ top: `${20 + Math.random() * 60}%`, left: `${10 + Math.random() * 80}%` }} />
-              ))}
-            </div>
-            <div className="text-center z-10">
-              <Navigation size={28} className="text-flash-orange mx-auto mb-2 animate-pulse" />
-              <p className="font-semibold text-flash-gray-700 text-sm">Entregador a caminho</p>
-              <p className="text-xs text-flash-gray-500">Previsão: 25 min</p>
-            </div>
-          </div>
+          <TrackingMap status={currentOrder?.status || 'preparing'} estimatedTime={currentOrder?.estimatedDelivery} />
 
-          <Card className="mb-4">
+          <Card className="mt-4 mb-4">
             <div className="flex items-center justify-between mb-5">
               <div>
                 <p className="text-xs text-flash-gray-500">Pedido</p>
@@ -548,7 +628,6 @@ const ClientApp: React.FC = () => {
             </div>
           </Card>
 
-          {/* Delivery person */}
           <Card className="mb-4">
             <div className="flex items-center gap-3">
               <Avatar name="Carlos Mendes" size="md" online />
@@ -621,6 +700,43 @@ const ClientApp: React.FC = () => {
     );
   }
 
+  // FAVORITES VIEW
+  if (view === 'favorites') {
+    const favoriteItems = mockMenuItems.filter(item => isFavorite(item.id));
+    return (
+      <div className="min-h-screen bg-flash-gray-50 pb-20">
+        <header className="bg-white sticky top-0 z-30 border-b border-flash-gray-100">
+          <div className="max-w-lg mx-auto px-4 py-4">
+            <h1 className="font-display font-bold text-lg">Favoritos</h1>
+          </div>
+        </header>
+        <div className="max-w-lg mx-auto px-4 py-4">
+          {favoriteItems.length === 0 ? (
+            <div className="text-center py-16">
+              <Heart size={48} className="text-flash-gray-300 mx-auto mb-4" />
+              <h3 className="font-bold text-flash-gray-900 mb-1">Nenhum favorito ainda</h3>
+              <p className="text-sm text-flash-gray-500">Adicione itens aos favoritos clicando no coração</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {favoriteItems.map(item => (
+                <Card key={item.id} className="flex items-center gap-4">
+                  <div className="text-3xl w-12 h-12 bg-flash-orange-50 rounded-xl flex items-center justify-center">{item.emoji}</div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-sm">{item.name}</h4>
+                    <p className="text-flash-orange font-bold text-sm">R$ {item.price.toFixed(2)}</p>
+                  </div>
+                  <Button variant="primary" size="sm" onClick={() => addToCart(item)}>Adicionar</Button>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
+        <BottomNav />
+      </div>
+    );
+  }
+
   // PROFILE VIEW
   if (view === 'profile') {
     return (
@@ -641,8 +757,8 @@ const ClientApp: React.FC = () => {
                 <p className="text-xs text-flash-gray-500">Pedidos</p>
               </div>
               <div className="text-center">
-                <p className="font-bold text-lg">R$ {orders.reduce((s, o) => s + o.total, 0).toFixed(0)}</p>
-                <p className="text-xs text-flash-gray-500">Gasto total</p>
+                <p className="font-bold text-lg">{loyaltyPoints}</p>
+                <p className="text-xs text-flash-gray-500">Pontos</p>
               </div>
               <div className="text-center">
                 <p className="font-bold text-lg">⭐ 4.9</p>
@@ -652,15 +768,15 @@ const ClientApp: React.FC = () => {
           </Card>
 
           <Card className="mb-4">
-            <h3 className="font-semibold text-sm mb-3">Endereço principal</h3>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-flash-orange-50 rounded-xl flex items-center justify-center">
-                <MapPin size={18} className="text-flash-orange" />
-              </div>
+            <div className="flex items-center gap-3 mb-3">
+              <Award size={20} className="text-flash-orange" />
               <div>
-                <p className="text-sm font-semibold">Av. Paulista, 1000 - Apto 42</p>
-                <p className="text-xs text-flash-gray-500">Bela Vista, São Paulo - SP</p>
+                <p className="font-semibold text-sm">Programa de Fidelidade</p>
+                <p className="text-xs text-flash-gray-500">Você tem {loyaltyPoints} pontos</p>
               </div>
+            </div>
+            <div className="bg-flash-orange-50 rounded-xl p-3">
+              <p className="text-xs text-flash-gray-600">Troque seus pontos por descontos exclusivos!</p>
             </div>
           </Card>
 
